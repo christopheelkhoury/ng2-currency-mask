@@ -62,11 +62,11 @@ export class InputService {
         if (this.options.decimal) {
             value = value.replace(this.options.decimal, ".");
         }
-        
-        if(this.options.dropSpecialCharacters){
+
+        if (this.options.dropSpecialCharacters) {
             value = value.replace(".", "");
         }
-        
+
         return parseFloat(value);
     }
 
@@ -75,6 +75,9 @@ export class InputService {
             let selectionStart = this.inputSelection.selectionStart;
             this.rawValue = "-" + this.rawValue;
             this.updateFieldValue(selectionStart + 1);
+        } else if (this.options.allowNegative && this.rawValue === "") {
+            this.rawValue = "-";
+            this.inputManager.setCursorAt(1);
         }
     }
 
